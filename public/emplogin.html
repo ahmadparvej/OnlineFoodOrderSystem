@@ -1,0 +1,45 @@
+<!--emplogin.html-->
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./css/common.css">
+      <script>
+         if(true === {{value}})
+         alert("Wrong Username or password");
+      </script>
+      <style>
+         body{
+            background:url("./img/brooke-lark-lcZ9NxhOSlo-unsplash.jpg");
+            background-size: cover;
+            background-position-x: -400px;
+            background-repeat: no-repeat;
+         }
+         .container {
+         padding: 16px;
+         }
+         span.psw {
+         float: right;
+         padding-top: 16px;
+         }
+      </style>
+   </head>
+   <body style = "text-align:center">
+      <div class="container">
+         <h3>Employee Login</h3>
+         <form action="/emplogin" method="post">
+            <h4>Enter Employee Id</h4>
+            <input type="text" placeholder="&#128104Enter employee Id" name="empid" required>
+            <h4>Enter Passward</h4>
+            <input type="password" placeholder="&#128274Enter Password" name="password" required>
+            <button type="submit">Login</button>
+         </form>
+         <a href="/login">
+         <button type="button">User Login</button>
+         </a>
+      </div>
+      <footer class="footer"> 
+      <p >Food is necessary"</p>
+      <footer>
+   </body>
+</html>

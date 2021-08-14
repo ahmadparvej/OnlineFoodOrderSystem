@@ -1,0 +1,49 @@
+<!--createemployee-->
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./css/common.css">
+      <script>
+         if(true === {{value}})
+         alert("Id already exists");
+         function error()
+         {
+         psw1 = document.getElementById('password').value
+         psw2 = document.getElementById('repassword').value
+         if(psw1 === psw2)
+         {
+                return true;
+         }
+         else
+         {
+         document.getElementById('error').innerHTML = "Password not match";		
+         return false;
+         }
+         }
+      </script>
+   </head>
+   <body style = "text-align:center">
+      <div class="container">
+         <h3>Create Employee account</h3>
+         <form action="/createemployee" method="post">
+            <h4>Enter Employee name</h4>
+            <input type="text" placeholder="&#128104Enter Employee name" name="empname" required>
+            <h4>Enter Employee id </h4>
+            <input type="text" placeholder="&#128231Enter Employee id" name="empid" required>
+            <h4>Enter Passward</h4>
+            <input type="password" id="password"  placeholder="&#128274Enter Password" name="password" required>
+            <h4>ReEnter Passward</h4>
+            <input type="password" id="repassword" placeholder="&#128274ReEnter Password" name="repassword" required>
+            <p style="color:red;" id="error" ></p>
+            <button type="submit" onclick="return error()" >Create account</button>
+         </form>
+         <a href="/admindashboard">
+         <button type="button">Admin dashboard</button>
+         </a>
+      </div>
+      <footer class="footer">
+      <p>"FooD is necessary"</p>
+      <footer>
+   </body>
+</html>

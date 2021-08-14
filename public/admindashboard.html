@@ -1,0 +1,85 @@
+<!-- admindashboard.html-->
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="./css/common.css">
+   <script>
+      if (true === {{ data }})
+      {
+         alert('wrong detail');
+      }
+   </script>
+   <style>
+      body {
+         margin: 0;
+         background-size:cover;
+         background-repeat: no-repeat;
+
+      }
+
+      .box a{
+         width: 50%;
+      }
+      .box {
+         display: flex;
+         flex-wrap: wrap;
+      }
+      .res .box{
+         display: block;
+         flex-wrap: nowrap;
+      }
+      .container {
+         padding: 50px;
+      }
+
+      span.psw {
+         float: right;
+         padding-top: 16px;
+      }
+   </style>
+</head>
+
+<body style="text-align:center" onload="addRequiredClass();">
+   <header id="header">
+      <div class="HeadContainer">
+         <h2><span id="first">Food</span><span id="second">Era</span></h2>
+      </div>
+   </header>
+   <h1>Admin dashboard</h1>
+   <div class="container">
+      <div class="box">
+         <a href="/createemployee">
+            <button type="button">Create employee account</button>
+         </a>
+         <a href="/removeemployee">
+            <button type="button">Remove employee account</button>
+         </a>
+         <a href="/removeuser">
+            <button type="button">Remove user account</button>
+         </a>
+         <a href="/upload">
+            <button type="button">Add food </button>
+         </a>
+         <a href="/foodremove">
+            <button type="button">Remove food </button>
+         </a>
+         <a href="/updateadmin">
+            <button type="button">Change Admin password or name</button>
+         </a>
+         <a href="/panel">
+            <button type="button">Main Panel</button>
+         </a>
+         <a href="/adminlogout">
+            <button type="button">logout</button>
+         </a>
+      </div>
+   </div>
+   <footer class="footer">
+      <p>food is necessary</p>
+      <footer>
+   <script src="./nav.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+#rzp-button1
+	{
+	background-color: #008CBA;
+	font-size: 24px;
+	border-radius: 8px;
+	text-align:center;
+	margin:auto;
+}
+</style>
+</head>
+<body>
+  <h2>Proceed to pay</h2>
+<button id="rzp-button1">Pay</button>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+		"key":"{{key}}", 
+		"amount": {{amount}}, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency" : "INR",
+        "name": "FOOD ERA COMPANY",
+        "description": "Test Transaction",
+        "order_id": "{{order_id}}", 
+    "handler": function (response){
+      response.address = "{{address}}";
+      response.email = '{{email}}';
+	fetch('/purchase', {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(response)
+  }).then(function(jsonData) {
+    return jsonData.json();
+  }).then(function(data) {
+    if(data.msg === 'success')
+    document.write('<h1>'+'SUCCESSFUL TRANSACTION '+'</h1>'+'<br>'+'<a href="/home">'+"GO TO HOME"+'</a>');
+    else
+    document.write('<h1>'+'UNSUCCESSFUL TRANSACTION '+'</h1>'+'<br>'+'<a href="/home">'+"GO TO HOME"+'</a>');
+  });
+    },
+    "prefill": {
+        "name": '{{username}}',
+        "email": '{{email}}',
+        "contact": '{{contact}}'
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!--newpsw.html-->
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./css/common.css">
+      <script>
+         function error()
+         {
+         psw1 = document.getElementById('password').value
+         psw2 = document.getElementById('repassword').value
+         if(psw1 === psw2)
+         {
+                return true;
+         }
+         else
+         {
+         document.getElementById('error').innerHTML = "Password not match";		
+         return false;
+         }
+         }
+      </script>
+   </head>
+   <body style = "text-align:center">
+      <div class="container">
+         <h3>Password recovery</h3>
+         <form action="/newpsw" method="post">
+            <h4>Enter New Passward</h4>
+            <input type="password" id="password"  placeholder="&#128274Enter New Password" name="password" required>
+            <h4>ReEnterNew Passward</h4>
+            <input type="password" id="repassword" placeholder="&#128274ReEnter New Password" name="repassword" required>
+            <p style="color:red;" id="error" ></p>
+            <input type="hidden" name="email" value="{{email}}" required>
+            <button type="submit" onclick="return error()" >Submit</button>
+         </form>
+         <a href="/login">
+         <button type="button">Login</button>
+         </a>
+      </div>
+      <footer class="footer">
+      <p>"FooD is necessary"</p>
+      <footer>
+   </body>
+</html>

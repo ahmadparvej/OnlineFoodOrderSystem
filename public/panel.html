@@ -1,0 +1,143 @@
+<!--panel.html-->
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="./css/common.css">
+   <script src="/socket.io/socket.io.js"></script>
+   <script>
+      let i = 0;
+      let _id = null;
+      var socket = io();
+      let data;
+      socket.on('testerEvent', function (res) {
+         data = JSON.parse(res);
+         next();
+      })
+      socket.on('broadcast', function (res) {
+         data = JSON.parse(res);
+         next();
+      })
+      function next() {
+         if (data.length === 0) {
+            _id = null;
+            document.getElementById('group').innerHTML = "<h1>" + "No new order request" + "</h1>";
+         }
+         else if (data.length - 1 === i) {
+            fooddisplay(data[i].name, data[i].username, data[i].quantity, data[i].address, data[i].orderstatus, data[i].payment_id, data[i].custom);
+            _id = data[i]._id
+            i = 0;
+         }
+         else {
+            fooddisplay(data[i].name, data[i].username, data[i].quantity, data[i].address, data[i].orderstatus, data[i].payment_id, data[i].custom);
+            _id = data[i]._id;
+            i++;
+         }
+      }
+
+      function fooddisplay(foodname, username, quantity, address, orderstatus, paymentid, custom) {
+         document.getElementById('foodname').innerHTML = "Food Name :- " + foodname;
+         document.getElementById('username').innerHTML = "Username :- " + username;
+         document.getElementById('quantity').innerHTML = "Quantity :- " + quantity;
+         document.getElementById('address').innerHTML = "Shipping Address :- " + address;
+         document.getElementById('status').innerHTML = "Status :- " + orderstatus;
+         document.getElementById('payment-id').innerHTML = "Payment Id :- " + paymentid;
+         document.getElementById('customisation').innerHTML = "Customisation :- " + custom;
+      }
+      function newstatus(value) {
+         if (_id !== null) {
+            socket.emit("clientEvent", { value: value.value, _id: _id })
+            i = 0;
+            next();
+            alert("FOOD ORDER STATUS CHANGED");
+         }
+      }
+   </script>
+   <style>
+      .container {
+         height: auto;
+         padding-top: 6px;
+         margin-bottom: 60px;
+         padding-bottom: 60px;
+      }
+      .res .group{
+         width: 300px;
+      }
+      .group {
+         width: 60%;
+         height: auto;
+         margin: auto;
+         padding: 25px;
+         padding-top: 30px;
+         background: aliceblue;
+         overflow-wrap: break-word;
+         border-radius: 8px;
+      }
+      input[type=button]{
+         width: 50%;
+      }
+      input[type=button]:hover {
+            background: #fe4066;
+            box-shadow: 0 0 10px #fe4066, 0 0 30px #fe4066, 0 0 50px #fe4066;
+         }
+      /* @media screen and (max-width: 600px) {
+         .topnav a {
+            float: none;
+            display: block;
+            text-align: left;
+            width: 100%;
+            margin: 0;
+            padding: 14px;
+         }
+
+         input[type=button]:hover {
+            background: #fe4066;
+            box-shadow: 0 0 10px #fe4066, 0 0 30px #fe4066, 0 0 50px #fe4066;
+         }
+         .group {
+            width: 350px;
+         }
+      } */
+   </style>
+</head>
+
+<body style="text-align:center" onload="addRequiredClass();">
+   <div class="nav-container nav-wrapper">
+      <div class="HeadContainer">
+         <h2><span id="first">Food</span><span id="second">Era</span></h2>
+      </div>
+      <ul class="nav-list">
+         <li><a class="active" href="/panel">Main Panel</a></li>
+         <li><a href="/emplogout">Logout</a></li>
+         <li><a href="/admin">Admin</a></li>
+         <li><a href="/orderhistory">Orderhistory</a></li>
+      </ul>
+      <div class="hamburger">
+         <span></span>
+         <span></span>
+         <span></span>
+      </div>
+   </div>
+   <div class="container">
+      <h1>Food info</h1>
+      <div class="group" id="group">
+         <p id="foodname"></p>
+         <p id="username"></p>
+         <p id="quantity"></p>
+         <p id="address"></p>
+         <p id="status"></p>
+         <p id="payment-id"></p>
+         <p id="customisation"></p>
+      </div>
+      <input type="button" id="next" value="Next" name="next" onclick="next()">
+      <input type="button" id="packed" value="packed" name="packed" onclick="newstatus(this)">
+      <input type="button" id="delevered" value="delevered" name="delevered" onclick="newstatus(this)">
+   </div>
+   <footer class="footer">
+      <p>"food is necessary"</p>
+      <footer>
+      <script src="./nav.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!--profile.html-->
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./css/common.css">
+      <script>
+         let data = {{{json data}}}; 
+         let userid = {{{json userid}}};
+         function userdata()
+         {
+         document.getElementById('username').innerHTML = "Username :- "+userid.username;
+         document.getElementById('email').innerHTML = "Email :- "+userid.email;
+         userhistory();
+         }
+         function userhistory()
+         {
+         	for( let i=0 ; i<data.length; i++ )
+         	{
+         	var para1 = document.createElement("p");
+         	para1.innerHTML = "Food Name :- "+data[i].name;
+         	var para2 = document.createElement("p");
+         	para2.innerHTML = "Food type :- "+data[i].type;
+         	var para3 = document.createElement("p");
+         	para3.innerHTML = "Price (Per unit) :- "+data[i].price;
+         	var para4 = document.createElement("p");
+         	para4.innerHTML = "Shipping address :- "+data[i].address;
+         	var para5 = document.createElement("p");
+         	para5.innerHTML = "Quantity :- "+data[i].quantity;
+         	var para6 = document.createElement("p");
+         	para6.innerHTML = "Status :- "+data[i].orderstatus;
+         	var para7 = document.createElement("p");
+         	para7.innerHTML = "Order date :- "+ new Date(data[i].date);
+         	var para8 = document.createElement("p");
+         	para8.innerHTML = "Total price :- "+parseFloat(data[i].price)*parseFloat(data[i].quantity);
+            var para9 = document.createElement("p");
+         	para9.innerHTML = "Customisation :- "+data[i].custom+"<br>"+"<br>"+"<br>";;
+         	document.getElementById('group').appendChild(para1); 
+         	document.getElementById('group').appendChild(para2); 
+         	document.getElementById('group').appendChild(para3); 
+         	document.getElementById('group').appendChild(para4); 
+         	document.getElementById('group').appendChild(para5); 
+         	document.getElementById('group').appendChild(para6); 
+         	document.getElementById('group').appendChild(para7); 
+         	document.getElementById('group').appendChild(para8); 
+            document.getElementById('group').appendChild(para9); 
+         }
+         addRequiredClass();
+         }
+      </script>
+      <style>
+         .container{ 
+         height:auto;
+         padding-top: 6px;
+         margin-bottom: 60px;
+         padding-bottom:60px;
+         overflow-wrap: break-word;
+         }
+         .group
+         {
+            font-size: 20px;
+         width:60%;
+         height:auto;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top:10px;
+         background:aliceblue;
+         padding: 25px;
+         }
+         header {
+         text-align: center;
+         padding: 3px;          
+         background-color:black;
+         font-weight: bold;
+         margin-top:0px;               
+         color:white;
+         }
+      </style>
+   </head>
+   <body style = "text-align:center" onload="userdata()">
+      <div class="nav-container nav-wrapper">
+         <div class="HeadContainer"><h2><span id="first">Food</span><span id="second">Era</span></h2></div>
+         <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+         </div>
+         <ul class="nav-list">
+         <li><a class="active" href="/home">Home</a></li>
+         <li><a href="/logout">Logout</a></li>
+         <li><a href="/chatbot">Chatbot</a></li>
+         <li><a href="/profile">Profile</a></li>
+         <li><a href="/cart">Cart</a></li>
+         </ul>
+      </div>
+      <div class="container">
+         <h1 id="username">User name</h1>
+         <h3 id="email">Email</h3>
+         <div class="group" id="group">
+            <h4>Order history</h4>
+         </div>
+      </div>
+      <footer class="footer">
+         <p>food is necessary</p>
+         <footer>
+   <script src="./nav.js"></script>
+   </body>
+</html>

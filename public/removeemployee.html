@@ -1,0 +1,29 @@
+<!--removeemployee.html-->
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./css/common.css">
+      <script>
+         if(true === {{value}})
+         {
+         alert('Employee Not found');
+         }
+      </script>
+   </head>
+   <body style = "text-align:center">
+      <div class="container">
+         <h3>Remove Employee account</h3>
+         <div class="box">
+            <form action="/removeemployee" method="post">
+               <h4 >Enter Employee id</h4>
+               <input type="text" placeholder="&#128104Enter employee id" name="empid" required>
+               <button type="submit">Remove account</button>
+            </form>
+         </div>
+      </div>
+      <footer class="footer">
+      <p >food is necessary</p>
+      <footer>
+   </body>
+</html>

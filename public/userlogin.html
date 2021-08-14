@@ -1,0 +1,68 @@
+<!--userlogin.html-->
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="./css/common.css">
+   <script>
+      if (true === {{ value }})
+      alert("Wrong Username or password");
+   </script>
+   <style>
+      body{
+         background: url("./img/brooke-lark-08bOYnH_r_E-unsplash.jpg");
+         background-size: cover;
+         background-position-x: 10%;
+         background-position-y: 5%;
+
+         background-repeat: no-repeat;
+         text-align:center;
+      }
+      .intro p{
+         border-radius: 5px;
+         background: aliceblue;
+         display: inline-block;
+         padding: 10px;
+      }
+      .HeadContainer .right-top-button{
+         margin-top: -12px;
+      }
+   </style>
+</head>
+   <header id="header">
+      <div class="HeadContainer">
+         <h2><span id="first">Food</span><span id="second">Era</span></h2>
+         <div class="right-top-button">
+            <a href="/signup">
+               <button type="button">Signup</button>
+            </a>
+         </div>
+      </div>
+      <div class="intro">
+         <p>“Eat breakfast like a king, lunch like a prince, and dinner like a pauper.” </p>
+      </div>
+   </header>
+   <div class="container">
+      <h3>Login</h3>
+      <form action="/login" method="post">
+         <input type="email" placeholder="&#128104Enter Email address" name="email" required>
+         <input type="password" placeholder="&#128274Enter Password" name="password" required>
+         <button type="submit">Login</button>
+      </form>
+      <a href="/forgotpsw">
+         <button type="button">Forgot Password</button>
+      </a>
+      <a href="/emplogin">
+         <button type="button">Employee login</button>
+      </a>
+      <a href="/admin">
+         <button type="button">Admin login</button>
+      </a>
+   </div>
+   <footer class="footer">
+      <p>food is necessary</p>
+      <footer>
+</body>
+
+</html>

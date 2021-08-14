@@ -1,0 +1,39 @@
+<!--otp.html-->
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="./css/common.css">
+   <style>
+      .box{
+         margin-top: 50px;
+      }
+   </style>
+   <script>
+      if (true === {{ data }})
+      {
+         alert('Wrong otp');
+      }
+   </script>
+   </head>
+<body style="text-align:center">
+
+   <div class="container">
+      <div class="box">
+         <p>
+            OTP valid only five minutes
+         </p>
+         <form action="/otpdata" method="post">
+            <h4>Enter OTP</h4>
+            <input type="text" placeholder="########" name="otp" required>
+            <button type="submit">Submit</button>
+         </form>
+      </div>
+   </div>
+   <footer class="footer">
+      <p>food is necessary</p>
+      <footer>
+</body>
+
+</html>

@@ -1,0 +1,289 @@
+<!--foodinfo.html-->
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="./css/common.css">
+   <script>
+      let data = {{{ json data }}};
+      let comments = {{{ json comments }}};
+      let email = {{{ json email }}};
+      let data3 = {{{ json data3 }}}
+      let i = 0;
+      var custom = JSON.parse(data.custom);
+
+      function foodinfo() {
+         addRequiredClass();
+         document.getElementById('img').src = "/upload/" + data.img;
+         document.getElementById('foodname').innerHTML = "<b>" + data.name + "</b>";
+         document.getElementById('email').value = email;
+         document.getElementById('price').innerHTML = "&#8377;" + data.price;
+         let newinput = document.createElement("INPUT");
+         newinput.setAttribute("type", "hidden");
+         newinput.setAttribute("name", "name");
+         newinput.setAttribute("value", data.name);
+         newinput.innerHTML = data.name;
+         document.getElementById("cartdata").appendChild(newinput);
+         if (custom.length === 0) {
+            document.getElementById("customisation").style.display = "none";
+            document.getElementById("custom").value = "Not applicable";
+         }
+         else {
+            var select = document.getElementById("customisation");
+            for (let i = 0; i < custom.length; i++) {
+               var opt = custom[i];
+               var el = document.createElement('option');
+               el.textContent = opt;
+               el.value = opt;
+               select.appendChild(el);
+            }
+         }
+      }
+      function comment() {
+         if (comments.length === 0) {
+            document.getElementById('comments').innerHTML = "Empty";
+         }
+         else if ((i + 1) == comments.length) {
+            document.getElementById('comments').innerHTML = comments[i].username + ":-" + comments[i].comment;
+            i = 0;
+         }
+         else {
+            document.getElementById('comments').innerHTML = comments[i].username + ":-" + comments[i].comment;
+            i++;
+         }
+      }
+      function usercomment() {
+         if (data3 == null) {
+            alert("Please buy first than give review");
+         }
+         else if (!document.getElementById('comment').value.replace(/\s/g, '').length) {
+            alert("Empty comment not allowed");
+         }
+         else if (!document.getElementById('username').value.replace(/\s/g, '').length) {
+            alert("Please Enter your name");
+         }
+         else {
+            let comment = document.getElementById('comment').value;
+            let username = document.getElementById('username').value;
+            let name = data.name;
+            let commentdata = { username: username, name: name, comment: comment };
+            const options = {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json'
+               },
+               body: JSON.stringify(commentdata)
+            }
+            fetch('/comment', options).then(
+               (tempdata) => {
+                  return tempdata.json();
+               }).then((data) => {
+                  comments = data;
+                  alert("Comment added successfully");
+                  document.getElementById('comment').value = "";
+                  document.getElementById('username').value = "";
+               });
+         }
+      }
+      function test() {
+         var temp = document.getElementById("customisation").value;
+         if (custom.length != 0) {
+            if (temp === "none") {
+               alert('Please select food customisation option');
+               return false;
+            }
+         }
+         return true;
+      }
+      function val(para) {
+         document.getElementById("custom").value = para.value;
+      }
+   </script>
+   <style>
+      body {
+         margin: 0;
+         font-weight: 700;
+      }
+
+      .group {
+         width: 80%;
+         height: auto;
+         padding: 10px 20px;
+         margin: auto auto;
+         background-color: white;
+         border-radius: 8px;
+      }
+
+      #custombtn {
+         background-color: #04AA6D;
+         color: white;
+         padding: 14px 20px;
+         width: 200px;
+         border: none;
+         border-radius: 7px;
+      }
+
+      #custombtn:hover {
+         background: #fe4066;
+      }
+
+      img.avatar {
+         width: 180px;
+         height: 180px;
+         overflow: hide;
+         border-radius: 5%;
+      }
+
+      .imgcontainer {
+         text-align: center;
+         margin: 12px 0 12px 0;
+      }
+
+      textarea {
+         width: 90%;
+         height: 200px;
+         border: 2px solid grey;
+         margin-bottom: 10px;
+         margin-top: 10px;
+      }
+
+      #tag {
+         margin: 17px;
+         height: 40px;
+         width: 89%;
+         border: none;
+         padding: auto;
+      }
+
+      #tag #username {
+         float: auto;
+         height: 35px;
+         border: 2px solid grey;
+         width: 85%
+      }
+
+      #tag #label {
+         float: auto;
+         height: 30px;
+         padding: 8px;
+         font-weight: bold;
+      }
+
+      #comments {
+         text-align: justify;
+         padding: 3px;
+         height: 100px;
+         width: 90%;
+         margin-top: 7px;
+         margin-left: auto;
+         margin-right: auto;
+         border: 2px solid grey;
+         outline: none;
+         border-radius: 5px;
+      }
+
+      #next {
+         text-align: center;
+         height: 50px;
+         margin-top: 7px;
+         border: none;
+         outline: none;
+         width: 92%;
+         padding: 18px 8px;
+         border-radius: 5px;
+      }
+
+      input[type=button] {
+         background: #04AA6D;
+         box-shadow: none;
+      }
+
+      input[type=button]:hover {
+         background: #fe4066;
+         box-shadow: 0 0 10px #fe4066, 0 0 30px #fe4066, 0 0 50px #fe4066;
+      }
+
+      #quantity {
+         height: 40px;
+      }
+
+      #customisation {
+         width: 40%;
+         background-color: #f2f0f0;
+         height: 40px;
+         margin-top: 8px;
+         border-radius: 5px;
+         border: none;
+         outline: none;
+      }
+   </style>
+</head>
+
+<body style="text-align:center" onload="foodinfo()">
+   <div class="nav-container nav-wrapper">
+      <div class="HeadContainer">
+         <h2><span id="first">Food</span><span id="second">Era</span></h2>
+      </div>
+      <ul class="nav-list">
+         <li><a class="active" href="/home">Home</a></li>
+         <li><a href="/logout">Logout</a></li>
+         <li><a href="/chatbot">Chatbot</a></li>
+         <li><a href="/profile">Profile</a></li>
+         <li><a href="/cart">Cart</a></li>
+      </ul>
+      <div class="hamburger">
+         <span></span>
+         <span></span>
+         <span></span>
+      </div>
+   </div>
+   <div class="container">
+      <h3>Food info</h3>
+      <div class="group">
+         <p id="foodname">Foodname</p>
+         <div class="imgcontainer">
+            <img src="/upload/logo.jpg" id="img" alt="foodimg" class="avatar">
+            <p id="price">Price</p>
+         </div>
+         <form id="cartdata" action="/addtocart" method="post" onsubmit="return test()">
+            <label for="quantity">Qty:</label>
+            <select id="quantity" name="quantity">
+               <option value="1" selected>1</option>
+               <option value="2">2</option>
+               <option value="3">3</option>
+               <option value="4">4</option>
+               <option value="5">5</option>
+               <option value="6">6</option>
+               <option value="7">7</option>
+               <option value="8">8</option>
+               <option value="9">9</option>
+               <option value="10">10</option>
+            </select>
+            <input type="hidden" name="email" id="email">
+            <input type="hidden" name="custom" id="custom">
+            <button type="submit" id="custombtn" name="custombtn">Add to cart</button>
+            <div id="part">
+               <select id="customisation" onchange="val(this)">
+                  <option value="none" selected>APPLY CUSTOMISATION</option>
+               </select>
+            </div>
+         </form>
+         <div id="tag">
+            <label id="label" for="username">Name</label>
+            <input type="text" id="username" name="username" placeholder="Username For review">
+         </div>
+         <textarea maxlength="50" id="comment" name="comment"
+            placeholder="Enter text here (max 50 character)..."></textarea>
+         <input type="button" class="btn" value="Add review" onclick="return usercomment()">
+         <div id="comments"></div>
+         <input type="button" id="next" class="btn" value="Next review" onclick="comment()">
+      </div>
+   </div>
+   <footer class="footer">
+      <p>food is necessary</p>
+      <footer>
+         <script src="./nav.js"></script>
+</body>
+
+</html>

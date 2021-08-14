@@ -1,0 +1,156 @@
+<!--upload.html-->
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="./css/common.css">
+   <script>
+      var custom = [];
+      var bool = 0;
+      function set(value) {
+         if (value.value === "no") {
+            document.getElementById("custom").style.display = "none";
+            bool = 0;
+         }
+         else {
+            document.getElementById("custom").style.display = "block";
+            bool = 1;
+         }
+      }
+      function cfunction() {
+         data = document.getElementById("cdata").value;
+         const para = document.createElement("p");
+         const node = document.createTextNode(data);
+         para.appendChild(node);
+         const elememt = document.getElementById("list");
+         elememt.appendChild(para);
+         custom.push(data);
+      }
+      function get() {
+         if (bool === 1)
+            document.getElementById("cust").value = JSON.stringify(custom);
+         else
+            document.getElementById("cust").value = JSON.stringify([]);
+      }
+   </script>
+   <style>
+      body {
+         background-image: linear-gradient(45deg, rgba(77, 183, 255, 1) 15%, rgba(103, 193, 255, 1) 25%, rgba(128, 204, 255, 1) 40%, rgba(154, 214, 255, 1) 50%, rgba(179, 224, 255, 1) 65%, rgba(205, 235, 255, 1) 75%, rgba(230, 245, 255, 1) 90%, rgba(255, 255, 255, 1) 100%);
+         font-family: 'Raleway', sans-serif;
+      }
+
+      select,
+      input[type=file],
+      input[type=text],
+      input[type=number] {
+         width: 50%;
+         padding: 18px 20px;
+         margin: 4px 0;
+         display: inline-block;
+         border: 1px solid #ccc;
+         box-sizing: border-box;
+         border-radius: 5px;
+         border: none;
+         outline: none;
+         background: white;
+      }
+
+      button {
+         background-color: #04AA6D;
+         color: white;
+         padding: 14px 20px;
+         margin: 4px 0;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         width: 50%;
+         font-size: 1rem;
+         font-family: 'Raleway', sans-serif;
+         transition: 0.3s ease;
+      }
+
+      button:hover {
+         background: #fe4066;
+         box-shadow: 0 0 10px #fe4066, 0 0 30px #fe4066, 0 0 50px #fe4066;
+      }
+
+      .container {
+         padding: 16px;
+      }
+
+      input:focus {
+         box-shadow: 0 0 10px #fe4066, 0 0 30px #fe4066, 0 0 50px #fe4066;
+      }
+
+      input[type="radio"] {
+         width: 10%;
+         margin-bottom: 30px;
+         box-shadow: none;
+      }
+
+      #custom {
+         margin: auto;
+      }
+
+      #cbtn {
+         background-color: #04AA6D;
+      }
+
+      #list {
+         height: 100px;
+         width: 50%;
+         margin: auto;
+         border: 2px solid grey;
+         border-radius: 5px;
+         overflow: auto;
+      }
+
+      h3 {
+         font-size: 2rem;
+         text-shadow: 0 0 10px #fe4066, 0 0 30px #fe4066, 0 0 50px #fe4066;
+
+      }
+   </style>
+</head>
+
+<body style="text-align:center">
+   <div class="container">
+      <h3>Add Food</h3>
+      <form action="/upload" method="post" enctype="multipart/form-data">
+         <h4>Enter Food name</h4>
+         <input type="text" placeholder="Enter Food name" name="name" maxlength="20" required>
+         <h4>Choose food type</h4>
+         <select name="type" id="type">
+            <option value="veg">Veg</option>
+            <option value="nonveg">NonVeg</option>
+            <option value="drink">Drink</option>
+            <option value="desserts">Desserts</option>
+         </select>
+         <h4>Enter Price</h4>
+         <input type="number" placeholder="Enter Price" min="10" max="5000" name="price" required>
+         <h4>Choose image</h4>
+         <input type="file" name="img" accept="image/*" required>
+         <br>
+         <h4>Add Food Variety</h4>
+         <input type="radio" onchange="set(this)" id="yes" name="yes" value="yes">
+         <label for="yes">Yes</label>
+         <input type="radio" onchange="set(this)" id="no" name="yes" value="no" checked>
+         <label for="no">No</label><br>
+         <div id="custom" style="display:none">
+            <input type="text" placeholder="Enter Food custom option" id="cdata" maxlength="20">
+            <button type="button" id="cbtn" onclick="cfunction()">Add customisation </button>
+            <div id="list"></div>
+         </div>
+         <input type="hidden" name="custom" id="cust">
+         <button type="submit" onclick="get()">Add</button>
+      </form>
+      <a href="/admindashboard">
+         <button type="button">Admin dashboard</button>
+      </a>
+   </div>
+</body>
+
+</html>

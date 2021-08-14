@@ -1,0 +1,95 @@
+<!--orderhistory.html-->
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./css/common.css">
+      <script>
+         let data = {{{json data}}}; 
+         
+         function orderhistory()
+         {
+            addRequiredClass();
+         	for( let i=0 ; i<data.length; i++ )
+         	{
+         	var username = document.createElement("p");
+                 username.innerHTML = "User Name :- "+data[i].username;
+         	var email = document.createElement("p");
+                 email.innerHTML = "Email :- "+data[i].email;
+         	var para1 = document.createElement("p");
+         	para1.innerHTML = "Food Name :- "+data[i].name;
+         	var para2 = document.createElement("p");
+         	para2.innerHTML = "Food type :- "+data[i].type;
+         	var para3 = document.createElement("p");
+         	para3.innerHTML = "Price (Per unit) :- "+data[i].price;
+         	var para4 = document.createElement("p");
+         	para4.innerHTML = "Shipping address :- "+data[i].address;
+         	var para5 = document.createElement("p");
+         	para5.innerHTML = "Quantity :- "+data[i].quantity;
+         	var para6 = document.createElement("p");
+         	para6.innerHTML = "Status :- "+data[i].orderstatus;
+         	var para7 = document.createElement("p");
+         	para7.innerHTML = "Order date :- "+ new Date(data[i].date);
+         	var para8 = document.createElement("p");
+         	para8.innerHTML = "Total price :- "+parseFloat(data[i].price)*parseFloat(data[i].quantity)+"<br>"+"<br>"+"<br>";
+         	document.getElementById('group').appendChild(username);
+         	document.getElementById('group').appendChild(email);	
+         	document.getElementById('group').appendChild(para1); 
+         	document.getElementById('group').appendChild(para2); 
+         	document.getElementById('group').appendChild(para3); 
+         	document.getElementById('group').appendChild(para4); 
+         	document.getElementById('group').appendChild(para5); 
+         	document.getElementById('group').appendChild(para6); 
+         	document.getElementById('group').appendChild(para7); 
+         	document.getElementById('group').appendChild(para8); 
+         	}
+         }
+      </script>
+      <style>
+         @media screen and (max-width: 600px) {
+         .topnav a, .topnav input[type=text], .topnav .search-container button {
+         float: none;
+         display: block;
+         text-align: left;
+         width: 100%;
+         margin: 0;
+         padding: 14px;
+         }
+         .topnav input[type=text] {
+         border: 1px solid #ccc;
+         }
+         .group
+         {
+         width:350px;
+         }
+         }                 
+      </style>
+   </head>
+   <body style = "text-align:center" onload="orderhistory()">
+      <div class="nav-container nav-wrapper">
+         <div class="HeadContainer">
+            <h2><span id="first">Food</span><span id="second">Era</span></h2>
+         </div>
+         <ul class="nav-list">
+            <li><a class="active" href="/panel">Main Panel</a></li>
+            <li><a href="/emplogout">Logout</a></li>
+            <li><a href="/admin">Admin</a></li>
+            <li><a href="/orderhistory">Orderhistory</a></li>
+         </ul>
+         <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+         </div>
+      </div>
+      <div class="container">
+         <h3>Order history</h3>
+         <div class="group" id="group">
+         </div>
+      </div>
+      <footer class="footer">
+      <p></p>food is necessary</p>
+      <footer>
+   <script src="./nav.js"></script>
+   </body>
+</html>

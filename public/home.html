@@ -1,0 +1,241 @@
+<!--home.html-->
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="./css/common.css">
+   <script>
+      let data = {{{ json data }}};
+      function foodtype() {
+         let typeinfo = null;
+         for (var i = 0; i < data.length; i++) {
+            switch (data[i].type) {
+               case 'veg':
+                  typeinfo = 'veg';
+                  break;
+               case 'nonveg':
+                  typeinfo = 'nonveg';
+                  break;
+               case 'drink':
+                  typeinfo = 'drink';
+                  break;
+               case 'desserts':
+                  typeinfo = 'desserts';
+                  break;
+            }
+
+            let newDiv1 = document.createElement("div");
+            let para1 = document.createElement("p");
+            let name = document.createTextNode(data[i].name);
+            let newDiv2 = document.createElement("div");
+            newDiv2.setAttribute("class", "imgcontainer");
+            let img = document.createElement("IMG");
+            img.setAttribute("class", "avatar");
+            img.setAttribute("src", "/upload/" + data[i].img);
+            img.setAttribute("alt", "Foodimg");
+            let para2 = document.createElement("p");
+            para2.innerHTML = "&#8377; " + data[i].price;
+            let newform = document.createElement("form");
+            newform.setAttribute("action", "/foodinfo");
+            newform.setAttribute("method", "post");
+            let newinput = document.createElement("INPUT");
+            newinput.setAttribute("type", "hidden");
+            newinput.setAttribute("value", data[i].name);
+            newinput.setAttribute("name", "name");
+            let btn = document.createElement("BUTTON");
+            btn.setAttribute("type", "submit");
+            btn.innerHTML = "View";
+            document.getElementById(typeinfo).appendChild(newDiv1);
+            newDiv1.appendChild(para1);
+            para1.appendChild(name);
+            newDiv1.appendChild(newDiv2);
+            newDiv2.appendChild(img);
+            newDiv1.appendChild(para2);
+            newDiv1.appendChild(newform);
+            newform.appendChild(newinput);
+            newform.appendChild(btn);
+            addRequiredClass();
+         }
+      }
+      function test() {                                    var temp = document.getElementById("textsearch").value;                                            if (temp.trim() === "")                            {                                                 alert('Please Type Some food name ');                                                                   return false;
+            }
+           return true;                                   }
+   </script>
+   <style>
+      body {
+         margin: 0;
+         background: url("./img/pexels-pixabay-256318.jpg");
+         background-size: contain;
+         background-repeat: repeat-y;
+      }
+
+      .container {
+         height: auto;
+         padding-top: 6px;
+         margin-bottom: 60px;
+         padding-bottom: 60px;
+      }
+
+      .group {
+         width: 90%;
+         height: 40%;
+         margin: auto;
+      }
+      .res .group{
+         width: 100%;
+      }
+      .flex-container {
+         display: flex;
+         height: auto;
+         background-color: white;
+         border-radius: 8px;
+         margin: 15px 15px;
+         padding: 20px 0;
+         padding-right: 15px;
+         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.05);
+         align-items: stretch;
+         flex-direction: row;
+         flex-wrap: nowrap;
+         overflow-x: auto;
+         overflow-y: hidden;
+         scroll-behavior: smooth;
+      }
+      .res .flex-container>div{
+         max-width: 450px;
+         height: 280px;
+      }
+      .flex-container>div p{
+         margin-top: 30px;
+      }
+      .flex-container>div {
+         max-width: 28%;
+         height: 300px;
+         background-color: white;
+         border-radius: 5px;
+         font-weight: 700;
+         padding: 10px 20px;
+         margin: 15px auto;
+         margin-left: 15px;
+         box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.20);
+         /*  inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+                     -5px -5px 5px rgba(0, 0, 0, 0.05),
+                     -5px -5px 5px rgba(255, 255, 255, 0.5); */
+         transition: 0.5s ease-in;
+         flex-basis: 33.333%;
+         flex-grow: 0;
+         flex-shrink: 0;
+      }
+
+      .flex-container>div:hover {
+         transform: translateY(-30px);
+         z-index: 9999;
+         background: linear-gradient(45deg, #F0FFF0, #00ce82);
+      }
+
+      .flex-container>div:hover button {
+         background: #fe4066;
+      }
+
+      img.avatar {
+         width: 100px;
+         border-radius: 5%;
+         height: 120px;
+      }
+
+      .imgcontainer {
+         text-align: center;
+         margin: 12px 0 12px 0;
+      }
+
+      button {
+         transition: 0.5s ease-in;
+      }
+      .res .search-container button{
+         width: 90px;
+      }
+      .res .flex-container>div button{
+         width: 90%;
+      } 
+      h3 {
+         font-size: 2rem;
+         margin-top: 30px;
+      }
+
+      @media screen and (max-width: 600px) {
+         .flex-container>div {
+            width: 100%;
+         }
+      }
+      #preloader {   
+        background:white;
+        height:100vh;
+        width:100vw;
+        position:fixed;
+        z-index:99999;
+        text-align: center;
+      }
+   </style>
+</head>
+
+<body onload="foodtype()">
+  <div id="preloader" >Loading</div>
+   <div class="nav-container nav-wrapper">
+      <div class="HeadContainer">
+         <h2><span id="first">Food</span><span id="second">Era</span></h2>
+      </div>
+      <ul class="nav-list">
+         <li><a class="active" href="/home">Home</a></li>
+         <li><a href="/logout">Logout</a></li>
+         <li><a href="/chatbot">Chatbot</a></li>
+         <li><a href="/profile">Profile</a></li>
+         <li><a href="/cart">Cart</a></li>
+      </ul>
+      <div class="search-container">
+         <form action="/search" method="post" onsubmit="return test()" >
+            <input type="text" id="textsearch" placeholder="find any food..." name="search">
+            <button type="submit">Search</button>
+         </form>
+      </div>
+      <div class="hamburger">
+         <span></span>
+         <span></span>
+         <span></span>
+      </div>
+   </div>
+   <h3>Food Menu</h3>
+   <div class="container">
+      <div class="group">
+         <h3>Veg Foods </h3>
+         <div class="flex-container" id="veg">
+         </div>
+      </div>
+      <h3>NonVeg Foods </h3>
+      <div class="group">
+         <div class="flex-container" id="nonveg">
+         </div>
+      </div>
+      <h3>Drink </h3>
+      <div class="group">
+         <div class="flex-container" id="drink">
+         </div>
+      </div>
+      <h3>Desserts </h3>
+      <div class="group">
+         <div class="flex-container" id="desserts">
+         </div>
+      </div>
+   </div>
+   <footer class="footer">
+      <p>food is necessary</p>
+      </footer>
+         <script src="./nav.js"></script>
+       <script>
+        window.addEventListener("load",function()
+        { 
+          document.getElementById('preloader').style.display="none";
+      });        
+      </script>
+</body>
+
+</html>

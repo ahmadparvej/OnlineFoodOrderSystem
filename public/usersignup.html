@@ -1,0 +1,70 @@
+<!--usersignup.html-->
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+   <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="./css/common.css">
+   <script>
+      if (true === {{ value1 }})
+      alert("Email already exists");
+      if (true === {{ value2 }})
+      alert("Wrong email address");
+      function error() {
+         psw1 = document.getElementById('password').value
+         psw2 = document.getElementById('repassword').value
+         if (psw1 === psw2) {
+            return true;
+         }
+         else {
+            document.getElementById('error').innerHTML = "Password not match";
+            return false;
+         }
+      }
+   </script>
+   <style>
+      body {
+         background: url("./img/pexels-ella-olsson-1640777\ \(1\).jpg");
+         background-size: cover;
+      }
+      .HeadContainer .right-top-button {
+         margin-top: -12px;
+      }
+   </style>
+</head>
+<header>
+   <div class="HeadContainer">
+      <h2><span id="first">Food</span><span id="second">Era</span></h2>
+      <div class="right-top-button">
+         <a href="/login">
+            <button type="button">Login</button>
+         </a>
+      </div>
+   </div>
+   </div>
+   <div class="intro">
+      <p>“Eat breakfast like a king, lunch like a prince, and dinner like a pauper.” </p>
+   </div>
+</header>
+<div class="container">
+   <h3>Signup</h3>
+   <form action="/signup" method="post">
+      <input type="text" placeholder="&#128104Enter User name" name="username" required>
+      <input type="email" placeholder="&#128231Enter Email address" name="email" required>
+      <input type="text" maxlength="10" pattern="\d{10}" placeholder="&#9742Enter phone number (without country code)"
+         name="contact" required>
+      <input type="password" id="password" minlength='6' placeholder="&#128274Enter Password" name="password" required>
+      <input type="password" id="repassword" minlength='6' placeholder="&#128274ReEnter Password" name="repassword"
+         required>
+      <p style="color:red;" id="error"></p>
+      <button type="submit" onclick="return error()">Signup</button>
+   </form>
+</div>
+<footer class="footer">
+   <p>food is necessary</p>
+   <footer>
+      </body>
+
+</html>

@@ -1,0 +1,47 @@
+<!--adminlogin.html-->
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./css/common.css">
+      <script>
+         if(true === {{value}})
+         alert("Wrong  admin details");
+      </script>
+      <style>
+         body {
+            background: url("./img/pexels-ella-olsson-1640777\ \(1\).jpg");
+            background-size: cover;
+            background-repeat:no-repeat ;
+            /* background-position-x: -700px; */
+         margin: 0;
+         }
+         .container {
+         padding: 16px;
+         margin-top: 100px;
+         }
+         span.psw {
+         float: right;
+         padding-top: 16px;
+         }
+      </style>
+   </head>
+   <body style = "text-align:center">
+      <div class="container">
+         <h3>Admin Login</h3>
+         <form action="/admin" method="post">
+            <h4>Enter Admin Name</h4>
+            <input type="text" placeholder="&#128104Enter admin name" name="admin" required>
+            <h4>Enter Passward</h4>
+            <input type="password" placeholder="&#128274Enter Password" name="password" required>
+            <button type="submit">Login</button>
+         </form>
+         <a href="/panel">
+         <button type="button">Main panel</button>
+         </a>
+      </div>
+      <footer class="footer">
+      <p>"Food is necessary"</p>
+      <footer>
+   </body>
+</html>

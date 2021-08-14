@@ -1,0 +1,12 @@
+{"name":"Sahi murga","type":"nonveg","img":"img-1609592865260.jpg","price":"370","custom":"[]","_id":"JSGELsrP3sjGkmKx"}
+{"name":"Pasty","type":"desserts","img":"img-1610521599843.jpg","price":"80","custom":"[]","_id":"NW3I4beATOqqrDKG"}
+{"name":"Maggie","type":"veg","img":"img-1609591405458.jpg","price":"50","custom":"[]","_id":"O0fvPQTtiZ7BstfK"}
+{"name":"Chai","type":"drink","img":"img-1609592144808.jpg","price":"20","custom":"[]","_id":"OIhlU6UJRT7sNhhH"}
+{"name":"Coffee","type":"drink","img":"img-1609594060085.jpg","price":"42","custom":"[]","_id":"SLiOJWuHQfEtH3kI"}
+{"name":"ice cream","type":"desserts","img":"img-1623754639146.jpg","price":"100","custom":"[\"cone\",\"cup\"]","_id":"ZfpBTFp5cgV8r5LL"}
+{"name":"Cake","type":"desserts","img":"img-1609593799658.jpg","price":"1000","custom":"[]","_id":"dv0aMkbMlimdl56g"}
+{"name":"Bari","type":"veg","img":"img-1609592937765.jpg","price":"80","custom":"[]","_id":"gqPAx6GqwWvOPvh3"}
+{"name":"Korma","type":"nonveg","img":"img-1609592610485.jpg","price":"270","custom":"[]","_id":"jigbWguqXVvEoDhI"}
+{"name":"Milk shake","type":"drink","img":"img-1609591450084.jpg","price":"50","custom":"[]","_id":"mp4awaXxAxepfnwi"}
+{"name":"Eggs","type":"nonveg","img":"img-1609591343598.jpg","price":"30","custom":"[]","_id":"n57HYruqamtxpG8H"}
+{"name":"Sahi Panner","type":"veg","img":"img-1609591531407.jpg","price":"150","custom":"[]","_id":"wNW3TLU7gQShtRFk"}

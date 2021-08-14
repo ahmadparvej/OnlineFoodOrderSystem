@@ -1,0 +1,32 @@
+<!--updateadmin.html-->
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./css/common.css">
+      <script>
+         if(true === {{value}})
+                alert("Wrong Password");
+      </script>
+   </head>
+   <body style = "text-align:center">
+      <div class="container">
+         <h3>Admin detail update</h3>
+         <form action="/updateadmin" method="post">
+            <h4>Enter Admin new Name</h4>
+            <input type="text" placeholder="&#128104Enter employee Id" name="admin" required>
+            <h4 >Enter New Passward</h4>
+            <input type="password" placeholder="&#128274Enter Password" name="newpassword" required>
+            <h4 >Enter old Passward</h4>
+            <input type="password" placeholder="&#128274Enter old Password" name="password" required>
+            <button type="submit">Submit</button>
+         </form>
+         <a href="/admindashboard">
+         <button type="button">Admin dashboard</button>
+         </a>
+      </div>
+      <footer class="footer">
+      <p >Food is necessary</p>
+      <footer>
+   </body>
+</html>

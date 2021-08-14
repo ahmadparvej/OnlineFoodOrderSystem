@@ -1,0 +1,212 @@
+<!--cart.html-->
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="./css/common.css">
+   <script>
+      let cart = {{{ json cart }}};
+      function cartdata() {
+         if (cart.length === 0) {
+            let para = document.createElement("p");
+            para.innerHTML = "<h1>" + "Your cart is empty" + "</h1>";
+            document.getElementById("group").appendChild(para);
+            document.getElementById("box1").style.visibility = "hidden";
+            document.getElementById("total").style.visibility = "hidden";
+         }
+         else {
+            fooditems();
+            total();
+         }
+         addRequiredClass();
+      }
+      function fooditems() {
+         let typeinfo = null;
+         for (var i = 0; i < cart.length; i++) {
+            switch (cart[i].type) {
+               case 'veg':
+                  typeinfo = 'veg';
+                  break;
+               case 'nonveg':
+                  typeinfo = 'nonveg';
+                  break;
+               case 'drink':
+                  typeinfo = 'drink';
+                  break;
+               case 'desserts':
+                  typeinfo = 'desserts';
+                  break;
+            }
+            let newDiv1 = document.createElement("div");
+            newDiv1.setAttribute("class", "box");
+            let para1 = document.createElement("p");
+            para1.innerHTML = "Food :- " + cart[i].name;
+            let para2 = document.createElement("p");
+            para2.innerHTML = "Price (per unit)  :- " + "&#8377; " + cart[i].price;
+            let para3 = document.createElement("p");
+            para3.innerHTML = "Quantity :- " + cart[i].quantity;
+            let para4 = document.createElement("p");
+            para4.innerHTML = "Food type :- " + cart[i].type;
+            let para5 = document.createElement("p");
+            para5.innerHTML = "To :- " + cart[i].username;
+            let para6 = document.createElement("p");
+            para6.innerHTML = "Customisation :- " + cart[i].custom;
+            let newinput1 = document.createElement("INPUT");
+            newinput1.setAttribute("type", "hidden");
+            newinput1.setAttribute("value", cart[i].name);
+            newinput1.setAttribute("name", "name");
+            let newinput2 = document.createElement("INPUT");
+            newinput2.setAttribute("type", "hidden");
+            newinput2.setAttribute("value", cart[i].email);
+            newinput2.setAttribute("name", "quantity");
+            let newinput3 = document.createElement("INPUT");
+            newinput3.setAttribute("type", "hidden");
+            newinput3.setAttribute("value", cart[i].quantity);
+            newinput3.setAttribute("name", "email");
+            let btn = document.createElement("button");
+            btn.setAttribute("value", i);
+            btn.setAttribute("onclick", "remove(this);")
+            btn.innerHTML = "Remove item";
+            document.getElementById("group").appendChild(newDiv1);
+            newDiv1.appendChild(para1);
+            newDiv1.appendChild(para2);
+            newDiv1.appendChild(para3);
+            newDiv1.appendChild(para4);
+            newDiv1.appendChild(para5);
+            newDiv1.appendChild(para6);
+            newDiv1.appendChild(newinput1);
+            newDiv1.appendChild(newinput2);
+            newDiv1.appendChild(newinput3);
+            newDiv1.appendChild(btn);
+         }
+      }
+      function remove(bt) {
+         let i = bt.value;
+         let email = cart[parseInt(i)].email;
+         let name = cart[parseInt(i)].name;
+         let quantity = cart[parseInt(i)].quantity;
+         let removedata = { email: email, name: name, quantity: quantity };
+         const options = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(removedata) };
+         fetch('/remove', options).then((tempdata) => {
+            return tempdata.json();
+         }).then((data) => {
+            cart = data;
+            document.querySelectorAll('.box').forEach(function (a) {
+               a.remove()
+            })
+            cartdata();
+         });
+      }
+      function placeorder() {
+         if (!document.getElementById('address').value.replace(/\s/g, '').length) {
+            alert("Please enter your shipping address");
+         }
+         else {
+            document.getElementById('useremail').value = cart[0].email;
+            document.order.submit();
+         }
+      }
+      function total() {
+         let total = 0;
+         for (var i = 0; i < cart.length; i++) {
+            total = total + cart[i].price * cart[i].quantity;
+         }
+         let div = document.getElementById("total"); div.innerHTML = "<h1>" + "Total Price = " + "&#8377; " + total + "</h1>";
+      }
+   </script>
+   <style>
+      .group {
+         width: 80%;
+         height: auto;
+         margin: auto;
+         padding: 25px;
+         background:aliceblue;
+         border-radius: 8px;
+         display: flex;
+         flex-wrap: wrap;
+      }
+      .res .box{
+         width: 100%;
+      }
+      .box {
+         width: 28%;
+         height: auto;
+         margin: 15px auto;
+         background: linear-gradient(45deg, #F0FFF0, #00ce82);
+         border-radius: 5px;
+         padding: 15px;
+      }
+
+      .box1 {
+         width: 80%;
+         padding: 25px;
+         margin: auto;
+         height: 250px;
+         border-radius: 8px;
+      }
+
+      #placeorder {
+         background: #04AA6D;
+         color: white;
+         margin-top: 17px;
+         border: none;
+         width: 80%;
+         height: 50px;
+      }
+      #placeorder:hover{
+         background: #fe4066;
+         box-shadow: 0 0 10px #fe4066, 0 0 30px #fe4066, 0 0 50px #fe4066;
+      }
+      #address {
+         margin-top: 17px;
+         width: 80%;
+         height: 150px;
+      }
+
+      #total {
+         width: 80%;
+         margin: auto;
+         height: 80px;
+         overflow: auto;
+         padding: 25px;
+      }
+   </style>
+</head>
+
+<body style="text-align:center" onload="cartdata()">
+   <div class="nav-container nav-wrapper">
+      <div class="HeadContainer"><h2><span id="first">Food</span><span id="second">Era</span></h2></div>
+      <div class="hamburger">
+         <span></span>
+         <span></span>
+         <span></span>
+      </div>
+      <ul class="nav-list">
+      <li><a class="active" href="/home">Home</a></li>
+      <li><a href="/logout">Logout</a></li>
+      <li><a href="/chatbot">Chatbot</a></li>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/cart">Cart</a></li>
+      </ul>
+   </div>
+   <div class="container">
+      <h1>Your cart</h1>
+      <div class="group" id="group">
+      </div>
+      <div id="total">
+      </div>
+      <div class="box1" id="box1">
+         <form name="order" id="order" action="/placeorder" method="post">
+            <input type="hidden" id="useremail" name="email">
+         </form>
+         <textarea name="address" id="address" placeholder="Enter your shipping address" form="order"></textarea>
+         <input id="placeorder" type="button" value="Place order" onclick="placeorder()">
+      </div>
+   </div>
+   <footer class="footer">
+      <p>food is necessary</p>
+      <footer>
+         <script src="./nav.js"></script>
+</body>
+</html>

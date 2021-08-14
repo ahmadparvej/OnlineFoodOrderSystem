@@ -1,0 +1,107 @@
+<!--search.html-->
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./css/common.css">
+      <script>
+         let data = {{{json data}}};
+         function  result()
+         {
+            addRequiredClass();
+         if(data.length === 0) 
+         {
+         document.getElementById('group').innerHTML = "<h1>"+"No Search result found"+"</h1>";
+         return;
+         }
+         for(let i = 0;i<data.length ;i++) 
+         {
+         let newDiv1 = document.createElement("div");
+         let para1 = document. createElement("p");
+         let name = document.createTextNode(data[i].name);
+         let newDiv2 = document.createElement("div");
+         newDiv2.setAttribute("class","imgcontainer");
+         let img = document.createElement("IMG");
+         img.setAttribute("class","avatar");
+         img.setAttribute("src","/upload/"+data[i].img);
+         img.setAttribute( "alt","Foodimg" );
+         let para2 = document. createElement("p");
+         para2.innerHTML = "&#8377; "+data[i].price;
+         let newform = document.createElement( "form" );
+         newform.setAttribute("action","/foodinfo");
+         newform.setAttribute("method","post");
+         let newinput = document.createElement("INPUT");
+         newinput.setAttribute("type", "hidden");
+         newinput.setAttribute("value", data[i].name);
+         newinput.setAttribute("name", "name");
+         let btn = document.createElement("BUTTON");
+         btn.setAttribute("type","submit");
+         btn.innerHTML = "View";
+         document.getElementById('group').appendChild(newDiv1);
+         newDiv1.appendChild(para1);
+         para1.appendChild(name);
+         newDiv1.appendChild(newDiv2);
+         newDiv2.appendChild(img);
+         newDiv1.appendChild(para2);
+         newDiv1.appendChild(newform);
+         newform.appendChild(newinput);
+         newform.appendChild(btn);
+         }
+         }
+
+         function test() {                                    var temp = document.getElementById("textsearch").value;                                            if (temp.trim() === "")
+	    {                              
+	    alert('Please Type Some food name ');      
+		return false;                                 }
+	   return true;                                   }
+      </script>
+      <style>      
+         .group
+         {
+         width:350px;
+	 margin:auto; 
+         }
+         img.avatar {
+         width: 100px;
+         border-radius: 5%;
+         }
+         .imgcontainer {
+         text-align: center;
+         margin: 12px 0 12px 0;
+         }
+      </style>
+   </head>
+   <body style = "text-align:center" onload="result()">
+      <div class="nav-container nav-wrapper">
+         <div class="HeadContainer">
+            <h2><span id="first">Food</span><span id="second">Era</span></h2>
+         </div>
+         <ul class="nav-list">
+            <li><a class="active" href="/home">Home</a></li>
+            <li><a href="/logout">Logout</a></li>
+            <li><a href="/chatbot">Chatbot</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/cart">Cart</a></li>
+         </ul>
+         <div class="search-container">
+            <form action="/search" method="post" onsubmit="return test()" >
+		    <input type="text" id="textsearch" placeholder="find food..." name="search">
+               <button type="submit">search</button>
+            </form>
+         </div>
+         <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+         </div>
+      </div>
+      <div class="container">
+         <h1>Search result</h1>
+         <div class="group" id="group"></div>
+      </div>
+      <footer class="footer">
+      <p >food is necessary</p>
+      <footer>
+         <script src="./nav.js"></script>
+   </body>
+</html>

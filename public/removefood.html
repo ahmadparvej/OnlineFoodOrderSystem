@@ -1,0 +1,32 @@
+<!--removefood.html-->
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./css/common.css">
+      <script>
+         if(true === {{value}})
+         {
+         alert('Food not found');
+         }
+         
+      </script>
+      <style>
+      </style>
+   </head>
+   <body style = "text-align:center">
+      <div class="container">
+         <h3>Remove Food</h3>
+         <div class="box">
+            <form action="/foodremove" method="post">
+               <h4>Enter Food Name</h4>
+               <input type="text" placeholder="Enter food information" name="name" required>
+               <button type="submit">Remove food</button>
+            </form>
+         </div>
+      </div>
+      <footer class="footer">
+      <p >"FooD is necessary"</p>
+      <footer>
+   </body>
+</html>

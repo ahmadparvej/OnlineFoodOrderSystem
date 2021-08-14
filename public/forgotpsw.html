@@ -1,0 +1,54 @@
+<!--forgotpsw.html-->
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./css/common.css">
+      <script>
+         if( true === {{ data }})
+         {
+         alert('Email not found');
+         }
+      </script>
+      <style>
+      .box{
+         height: 100vh;
+      }
+         header {
+         text-align: center;
+         padding: 2px;
+         background-color:lightgray;
+         font-weight: bold;
+         margin-top:1px;
+         }
+         .container {
+         padding: 16px;
+         }
+         span.psw {
+         float: right;
+         padding-top: 16px;
+         }
+         h4{
+            font-size: 1.5rem;
+         }
+         h3{
+            font-size: 2rem;
+         }
+      </style>
+   </head>
+   <body style = "text-align:center">
+      <div class="container">
+         <h3>Forgot Password</h3>
+         <div class="box">
+            <form action="/forgotpsw" method="post">
+               <h4>Enter User email</h4>
+               <input type="text" placeholder="&#128104Enter user email" name="email" required>
+               <button type="submit">Recover</button>
+            </form>
+         </div>
+      </div>
+      <footer class="footer">
+      <p >food is necessary</p>
+      <footer>
+   </body>
+</html>
